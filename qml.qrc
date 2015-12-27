@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fonts/FontAwesome.otf</file>
+        <file>fonts/ProximaNova-Light.otf</file>
+        <file>fonts/ProximaNova-Regular.otf</file>
+        <file>qml/controls/FontAwesome.qml</file>
+        <file>qml/controls/HifiWebView.qml</file>
+        <file>qml/controls/IconOverText.qml</file>
+        <file>qml/crossbar/CrossBar.qml</file>
+        <file>qml/crossbar/CrossBarChild.qml</file>
+        <file>qml/crossbar/CrossBarItem.qml</file>
+        <file>qml/subMenus/Audio.qml</file>
+        <file>qml/subMenus/Directory.qml</file>
+        <file>qml/subMenus/Display.qml</file>
+        <file>qml/subMenus/Market.qml</file>
+        <file>qml/subMenus/Mic.qml</file>
+        <file>qml/subMenus/Settings.qml</file>
+        <file>qml/subMenus/View.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/WireFrame.qml</file>
+        <file>js/utils.js</file>
+        <file>images/settings.png</file>
+        <file>images/chip.svg</file>
+        <file>images/gear.svg</file>
+        <file>html/loading.css</file>
+        <file>html/loading.html</file>
+    </qresource>
+</RCC>
