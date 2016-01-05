@@ -6,44 +6,22 @@ import "crossbar"
 import "controls"
 import "subMenus" as Sub
 
-Item {
+FocusScope {
     id: topRoot
     clip: true
 
     FontLoader { id: lightFont; source: "../fonts/ProximaNova-Light.otf" }
     FontLoader { id: mainFont; source: "../fonts/ProximaNova-Regular.otf" }
 
-    Sub.Mic {
-        id: subMic
-        crossBar: crossBar
-    }
-    Sub.Audio {
-        id: subAudio
-        crossBar: crossBar
-    }
-    Sub.Directory {
-        id: subDirectory
-        crossBar: crossBar
-    }
-    Sub.Market {
-        id: subMarket
-        crossBar: crossBar
-    }
-    Sub.Display {
-        id: subDisplay
-        crossBar: crossBar
-    }
-    Sub.Settings {
-        id: subSettings
-        crossBar: crossBar
-    }
-    Sub.View {
-        id: subView
-        crossBar: crossBar
-    }
+    Component { id: subMic; Sub.Mic { } }
+    Component { id: subAudio; Sub.Audio { } }
+    Component { id: subDirectory; Sub.Directory { } }
+    Component { id: subMarket; Sub.Market { } }
+    Component { id: subDisplay; Sub.Display { } }
+    Component { id: subSettings; Sub.Settings { } }
+    Component { id: subView; Sub.View { } }
 
     onEnabledChanged: {
-        console.log("Enabled changed " + enabled);
         crossBar.restore()
         if (enabled) {
             if (Account.isLoggedIn()) {
@@ -54,6 +32,7 @@ Item {
         offscreenFlags.navigationFocused = enabled;
     }
 
+    // Blur for the content when a cross bar child item is up
     GaussianBlur {
         id: blur
         z: content.z - 1
@@ -64,6 +43,8 @@ Item {
         visible: false
     }
 
+    // Enclose the content in a single rectangle in order to
+    // support the blur effect (blur and target should be siblings)
     Rectangle {
         color: "white"
         id: content
@@ -84,10 +65,9 @@ Item {
                 KeyNavigation.right: resumeIcon
             }
 
-            Item {
-                width: 10
-                height: 1
-            }
+            // Spacer to account for the asymmetry of the
+            // text item with wide letter spacing
+            Item { width: 10; height: 1 }
 
             Text {
                 anchors.top: parent.top
@@ -107,14 +87,7 @@ Item {
                 icon: "\uf04b"
                 text: "Resume"
                 onPressed: {
-                    var obj = topRoot;
-                    // Find the parent object
-                    while (obj != null && obj.objectName != "topLevelWindow") {
-                        obj = obj.parent
-                    }
-                    if (obj) {
-                        obj.enabled = false;
-                    }
+                    Utils.closeDialog(topRoot)
                 }
                 KeyNavigation.down: crossBar
                 KeyNavigation.left: quitIcon
@@ -122,14 +95,13 @@ Item {
             }
         }
 
-
         CrossBar {
             id: crossBar
-            focus: true
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height / 3.0
             y: parent.height / 3.0
+            targetParent: topRoot
 
             model: ListModel {
                 ListElement { name: "Mic" }
@@ -142,13 +114,6 @@ Item {
             }
 
             subItems: [ subMic, subAudio, subView, subDisplay, subDirectory, subMarket, subSettings ]
-
-            onFocusChanged: {
-                if (crossBar.activeFocus) {
-                    blur.visible = false
-                }
-            }
-
 
             onChildOpened: {
                 blur.visible = true
@@ -198,6 +163,20 @@ Item {
             }
         }
     }
+
+    function closeOverlayWindow(item) {
+        while (item && item.objectName !== "topLevelWindow") {
+            item = item.parent
+        }
+        if (item) {
+            item.enabled = false
+        } else {
+            console.warn("No top level window found")
+        }
+    }
+
+    Keys.onEscapePressed: closeOverlayWindow(topRoot)
+
     KeyNavigation.up: crossBar
     KeyNavigation.down: crossBar
     KeyNavigation.left: crossBar

@@ -7,7 +7,6 @@ import "../controls"
 
 CrossBarChild {
     id: root
-
     Rectangle {
         width: 800; height: 600
         anchors.horizontalCenter: parent.horizontalCenter
@@ -21,6 +20,19 @@ CrossBarChild {
             anchors.fill: parent
             anchors.margins: 10
             url: "https://metaverse.highfidelity.com/directory"
+            Rectangle {
+                color: "#7f0000ff"
+                visible: parent.focus
+            }
+        }
+
+        Action {
+            shortcut: "Escape"
+            onTriggered: {
+                console.log("triggered escape")
+                root.closeChild()
+            }
+            enabled: root.visible
         }
     }
 }

@@ -7,14 +7,11 @@ import "../controls"
 
 CrossBarChild {
     id: root
-    property var startingUrl: "../../html/loading.html"
-    
-    onVisibleChanged: {
-        if (visible) {
-            webview.url = "https://metaverse.highfidelity.com/marketplace"
-        } else {
-            webview.url = startingUrl
-        }
+
+    Action {
+        shortcut: "Escape"
+        onTriggered: root.closeChild()
+        enabled: root.visible
     }
 
     Rectangle {
@@ -30,7 +27,7 @@ CrossBarChild {
             id: webview
             anchors.fill: parent
             anchors.margins: 10
-            url: startingUrl
+            url: "https://metaverse.highfidelity.com/marketplace"
         }
     }
 }

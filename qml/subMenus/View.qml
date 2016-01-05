@@ -1,21 +1,13 @@
 import QtQuick 2.5
 
 import "../crossbar"
+import "../../js/utils.js" as Utils
 
-CrossBarChild {
-    Rectangle {
-        width: 640; height: 480
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        color: "white"
-        radius: 10
-        border.width: 5
-        border.color: "gray"
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            font.pointSize: 36
-            text: "Not Implemented Yet"
-        }
-    }
+CrossBarMenuChild {
+    id: root
+    property var path: ["View", "Camera Mode"];
+    property var menu: Utils.findInRootMenu(root, root.path);
+    model: Utils.menuItemsToListModel(root, root.menu.items);
 }
+
+

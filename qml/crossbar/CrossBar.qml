@@ -9,6 +9,8 @@ PathView {
     preferredHighlightBegin: 0.5
     preferredHighlightEnd: 0.5
     property var subItems: []
+    property var currentChild
+    property var targetParent
 
     signal childOpened()
     signal restore()
@@ -102,21 +104,26 @@ PathView {
 
     onPressed: {
         if (subItems.length > index) {
-            subItems[index].visible = true
-            subItems[index].forceActiveFocus()
+            currentChild = subItems[index].createObject(targetParent);
+            currentChild.crossBar = root
+            currentChild.visible = true
+            currentChild.forceActiveFocus()
             childOpened()
         }
     }
 
     onRestore: {
-        console.log("Hiding children")
-        for (var item in subItems) {
-            item.visible = false;
+        if (currentChild) {
+            currentChild.destroy()
+            currentChild = null
         }
-        forceActiveFocus()
+
+        if (currentItem) {
+            currentItem.forceActiveFocus()
+        }
     }
 
     onCountChanged: {
-        crossBar.gotoIndex(0)
+        gotoIndex(0)
     }
 }

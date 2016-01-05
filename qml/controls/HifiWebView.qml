@@ -6,27 +6,35 @@ WebEngineView {
     id: webview
     url: "https://metaverse.highfidelity.com/directory"
 
+    Component.onDestruction: webview.stop()
+
     onLoadingChanged: {
         // Required to support clicking on "hifi://" links
         if (WebEngineView.LoadStartedStatus == loadRequest.status) {
             var url = loadRequest.url.toString();
-            console.log("Checking handability of URL " + url)
             if (urlHandler.canHandleUrl(url)) {
-                console.log("Attempting to handle URL " + url)
                 if (urlHandler.handleUrl(url)) {
-                    console.log("Handled URL " + url + " stopping web load")
                     webview.stop();
-                    console.log("Stopped")
                 }
             }
         }
     }
 
+    property var originalUrl
+    property var lastFixupTime: 0
+
     onUrlChanged: {
         var currentUrl = url.toString();
-        var newUrl = urlHandler.fixupUrl(currentUrl);
-        if (newUrl != currentUrl) {
-            console.log("Changing URL frm " + currentUrl + " to " + newUrl)
+        var newUrl = urlHandler.fixupUrl(currentUrl).toString();
+        if (newUrl !== currentUrl) {
+            var now = new Date().valueOf();
+            if (url === originalUrl && (now - lastFixupTime < 100))  {
+                console.warn("URL fixup loop detected")
+                return;
+            }
+            console.log("Changing URL from " + currentUrl + " to " + newUrl)
+            originalUrl = url
+            lastFixupTime = now
             url = newUrl;
         }
     }

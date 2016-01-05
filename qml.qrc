@@ -9,6 +9,7 @@
         <file>qml/crossbar/CrossBar.qml</file>
         <file>qml/crossbar/CrossBarChild.qml</file>
         <file>qml/crossbar/CrossBarItem.qml</file>
+        <file>qml/crossbar/CrossBarMenuChild.qml</file>
         <file>qml/subMenus/Audio.qml</file>
         <file>qml/subMenus/Directory.qml</file>
         <file>qml/subMenus/Display.qml</file>
@@ -24,5 +25,21 @@
         <file>images/gear.svg</file>
         <file>html/loading.css</file>
         <file>html/loading.html</file>
+        <file>qml/TestMenu.qml</file>
+        <file>main.cpp</file>
+        <file>qml/menu/VrMenu.qml</file>
+        <file>qml/menu/VrMenuItem.qml</file>
+        <file>qml/styles/Border.qml</file>
+        <file>qml/styles/ButtonStyle.qml</file>
+        <file>qml/styles/HifiConstants.qml</file>
+        <file>qml/styles/HifiPalette.qml</file>
+        <file>qml/styles/IconButtonStyle.qml</file>
+        <file>qml/lcars/Constants.qml</file>
+        <file>qml/lcars/fonts/tt0105m_.TTF</file>
+        <file>qml/lcars/fonts/tt0106m0.TTF</file>
+        <file>qml/MenuTest.qml</file>
+        <file>qml/menu/VrMenuView.qml</file>
+        <file>qml/menu/Text.qml</file>
+        <file>qml/LcarsTest.qml</file>
     </qresource>
 </RCC>

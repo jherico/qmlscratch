@@ -15,6 +15,7 @@ CrossBarChild {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pointSize: 36
+            focus: true
             text: "Not Implemented Yet"
         }
     }
