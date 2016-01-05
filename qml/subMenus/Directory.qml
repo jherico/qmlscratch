@@ -7,32 +7,28 @@ import "../controls"
 
 CrossBarChild {
     id: root
-    Rectangle {
-        width: 800; height: 600
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        color: "white"
-        radius: 10
-        border.width: 5
-        border.color: "gray"
+    name: "Directory"
+    delegate: Component {
+        Rectangle {
+            width: 800; height: 600
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            color: "white"
+            radius: 10
+            border.width: 5
+            border.color: "gray"
 
-        HifiWebView {
-            anchors.fill: parent
-            anchors.margins: 10
-            url: "https://metaverse.highfidelity.com/directory"
-            Rectangle {
-                color: "#7f0000ff"
-                visible: parent.focus
+            HifiWebView {
+                anchors.fill: parent
+                anchors.margins: 10
+                url: "https://metaverse.highfidelity.com/directory"
             }
-        }
 
-        Action {
-            shortcut: "Escape"
-            onTriggered: {
-                console.log("triggered escape")
-                root.closeChild()
+            Action {
+                shortcut: "Escape"
+                onTriggered: root.closeChild()
+                enabled: root.visible
             }
-            enabled: root.visible
         }
     }
 }

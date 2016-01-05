@@ -7,27 +7,29 @@ import "../controls"
 
 CrossBarChild {
     id: root
+    name: "Market"
+    delegate: Component {
+        Rectangle {
+            width: 800; height: 600
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            color: "white"
+            radius: 10
+            border.width: 5
+            border.color: "gray"
 
-    Action {
-        shortcut: "Escape"
-        onTriggered: root.closeChild()
-        enabled: root.visible
-    }
+            HifiWebView {
+                anchors.fill: parent
+                anchors.margins: 10
+                url: "https://metaverse.highfidelity.com/marketplace"
+            }
 
-    Rectangle {
-        width: 800; height: 600
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        color: "white"
-        radius: 10
-        border.width: 5
-        border.color: "gray"
+            Action {
+                shortcut: "Escape"
+                onTriggered: root.closeChild()
+                enabled: root.visible
+            }
 
-        HifiWebView {
-            id: webview
-            anchors.fill: parent
-            anchors.margins: 10
-            url: "https://metaverse.highfidelity.com/marketplace"
         }
     }
 }

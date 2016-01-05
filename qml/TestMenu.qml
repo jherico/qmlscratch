@@ -48,28 +48,77 @@ Menu {
     }
 
     Menu {
+        title: "Display"
+        ExclusiveGroup { id: displayMode }
+        MenuItem {
+            text: "Oculus"
+            exclusiveGroup: displayMode
+            checkable: true
+        }
+        MenuItem {
+            text: "OpenVR"
+            exclusiveGroup: displayMode
+            checkable: true
+        }
+        MenuItem {
+            text: "OSVR"
+            exclusiveGroup: displayMode
+            checkable: true
+        }
+        MenuItem {
+            text: "2D Screen"
+            exclusiveGroup: displayMode
+            checkable: true
+            checked: true
+        }
+        MenuItem {
+            text: "3D Screen (Active)"
+            exclusiveGroup: displayMode
+            checkable: true
+        }
+        MenuItem {
+            text: "3D Screen (Passive)"
+            exclusiveGroup: displayMode
+            checkable: true
+        }
+    }
+
+    Menu {
         title: "View"
         Menu {
             title: "Camera Mode"
+            ExclusiveGroup { id: cameraMode }
             MenuItem {
+                exclusiveGroup: cameraMode
                 text: "First Person";
-                onTriggered: console.log(text)
+                onTriggered: console.log(text + " checked " + checked)
+                checkable: true
+                checked: true
             }
             MenuItem {
+                exclusiveGroup: cameraMode
                 text: "Third Person";
                 onTriggered: console.log(text)
+                checkable: true
             }
             MenuItem {
+                exclusiveGroup: cameraMode
                 text: "Independent Mode";
                 onTriggered: console.log(text)
+                checkable: true
             }
             MenuItem {
+                exclusiveGroup: cameraMode
                 text: "Entity Mode";
                 onTriggered: console.log(text)
+                enabled: false
+                checkable: true
             }
             MenuItem {
+                exclusiveGroup: cameraMode
                 text: "Fullscreen Mirror";
                 onTriggered: console.log(text)
+                checkable: true
             }
         }
     }

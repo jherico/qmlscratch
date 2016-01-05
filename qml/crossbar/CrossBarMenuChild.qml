@@ -1,62 +1,96 @@
 import QtQuick 2.5
 
-import "../crossbar"
+import "../controls"
 import "../../js/utils.js" as Utils
 
 CrossBarChild {
     id: root
-    property alias model: listView.model
+    property var model;
+    property var listView;
 
-    Rectangle {
-        id: listViewContainer
-        height: listView.contentHeight + 16
+    delegate: Component {
+        Rectangle {
+            id: listViewContainer
+            height: listView.contentHeight + 64
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            color: "white"
+            radius: 10
+            border.width: 5
+            border.color: "gray"
 
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        color: "white"
-        radius: 10
-        border.width: 5
-        border.color: "gray"
+            ListView {
+                id: listView
+                anchors.fill: parent
+                anchors.topMargin: 32
+                anchors.margins: 8
+                model: root.model
 
-        ListView {
-            id: listView
-            anchors.fill: parent
-            anchors.margins: 8
-            model: root.model
-
-            function triggerCurrentItem() {
-                if (currentIndex >= 0) {
-                    model.get(currentIndex).item.trigger()
-                    closeChild();
-                    Utils.closeDialog(root);
-                }
-            }
-
-            highlight: Rectangle {
-                width: root.currentItem ? root.currentItem.width : 0
-                height: root.currentItem ? root.currentItem.height : 0
-                color: "lightsteelblue"; radius: 3
-            }
-
-            delegate: Text {
-                text: name
                 Component.onCompleted: {
-                    var widthPlusMargins = implicitWidth + 16
-                    if (listViewContainer.width < widthPlusMargins) {
-                        listViewContainer.width = widthPlusMargins
+                    root.listView = listView;
+
+                }
+
+                function triggerCurrentItem() {
+                    if (currentIndex >= 0 && currentItem.enabled) {
+                        model.get(currentIndex).item.trigger()
+                        closeChild();
+                        Utils.closeDialog(root);
                     }
                 }
 
-                font.family: mainFont.name
-                font.pointSize: 24
-                anchors.left: parent.left
-                anchors.right: parent.right
-                horizontalAlignment: Text.AlignHCenter
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: listView.currentIndex = index
-                    onClicked: listView.triggerCurrentItem()
+                highlight: Rectangle {
+                    //width: root.currentItem ? root.currentItem.width : 0
+                    //height: root.currentItem ? root.currentItem.height : 0
+                    color: "lightsteelblue"; radius: 3
+                }
+
+                delegate: Item {
+                    implicitWidth: text.implicitWidth + check.width * 2 + 8
+                    implicitHeight: text.implicitHeight
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    enabled: item.enabled
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (index == listView.currentIndex) {
+                                listView.triggerCurrentItem()
+                            } else {
+                                listView.currentIndex = index;
+                            }
+                        }
+                    }
+
+                    FontAwesome{
+                        id: check
+                        text: "\uf00c"
+                        visible: item.checked
+                        anchors.top: text.top
+                        anchors.bottom: text.bottom
+                        width: height
+                        anchors.right: text.left
+                        anchors.rightMargin: 4
+                        font.pointSize: 18
+                    }
+
+                    Text {
+                        id: text
+                        text: name
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.family: lightFont.name
+                        color: item.enabled ? "#222" : "gray"
+                        font.pointSize: 18
+                        font.capitalization: Font.AllUppercase
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                    Component.onCompleted: {
+                        var widthPlusMargins = implicitWidth + 16
+                        if (listViewContainer.width < widthPlusMargins) {
+                            listViewContainer.width = widthPlusMargins
+                        }
+                    }
                 }
             }
         }

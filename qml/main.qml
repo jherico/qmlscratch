@@ -17,9 +17,18 @@ ApplicationWindow {
         objectName: Utils.OFFSCREEN_ROOT_OBJECT_NAME
         property var rootMenu: TestMenu { objectName: "rootMenu" }
 
+        Timer {
+            id: timer
+            running: false
+            interval: 100
+            onTriggered: wireFrameContainer.enabled = true
+        }
+
         Item {
+            id: wireFrameContainer
             objectName: Utils.OFFSCREEN_DIALOG_OBJECT_NAME
             anchors.fill: parent
+            onEnabledChanged: if (!enabled) timer.running = true
 
             WireFrame {
                 id: wireFrame
