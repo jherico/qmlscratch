@@ -2,30 +2,41 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtGraphicalEffects 1.0
 
-import "crossbar"
-import "controls"
-import "subMenus" as Sub
+import "../controls"
+import "../controls/crossbar"
+import "../../js/utils.js" as Utils
+import "../../js/Global.js" as Global
+import "children" as Child
 
 FocusScope {
     id: topRoot
     clip: true
 
-    FontLoader { id: lightFont; source: "../fonts/ProximaNova-Light.otf" }
-    FontLoader { id: mainFont; source: "../fonts/ProximaNova-Regular.otf" }
+    FontLoader { id: lightFont; source: "fonts/ProximaNova-Light.otf" }
+    FontLoader { id: mainFont; source: "fonts/ProximaNova-Regular.otf" }
 
-    Component { id: subMic; Sub.Mic { } }
-    Component { id: subAudio; Sub.Audio { } }
-    Component { id: subDirectory; Sub.Directory { } }
-    Component { id: subMarket; Sub.Market { } }
-    Component { id: subDisplay; Sub.Display { } }
-    Component { id: subSettings; Sub.Settings { } }
-    Component { id: subView; Sub.View { } }
+    Component { id: subMic; Child.Mic { } }
+    Component { id: subAudio; Child.Audio { } }
+    Component { id: subDirectory; Child.Directory { } }
+    Component { id: subMarket; Child.Market { } }
+    Component { id: subDisplay; Child.Display { } }
+    Component { id: subSettings; Child.Settings { } }
+    Component { id: subView; Child.View { } }
+
+    Component.onCompleted: {
+        crossBar.restore();
+        if (enabled) {
+            if (Global.Interfaces.Account.isLoggedIn()) {
+                username.text = Global.Interfaces.Account.getUsername();
+            }
+        }
+    }
 
     onEnabledChanged: {
         crossBar.restore()
         if (enabled) {
-            if (Account.isLoggedIn()) {
-                username.text = Account.getUsername();
+            if (Global.Interfaces.Account.isLoggedIn()) {
+                username.text = Global.Interfaces.Account.getUsername();
             }
         }
         // FIXME this will break once we have more than one dialog visible

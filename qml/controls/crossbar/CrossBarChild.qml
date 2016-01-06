@@ -1,5 +1,5 @@
 import QtQuick 2.5
-import QtQuick.Controls 1.4
+import ".."
 
 FocusScope {
     id: root
@@ -58,4 +58,6 @@ FocusScope {
                 break
         }
     }
+
+    FocusMarker{}
 }

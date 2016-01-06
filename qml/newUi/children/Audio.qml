@@ -1,6 +1,7 @@
 import QtQuick 2.5
 
-import "../crossbar"
+import "../../controls/crossbar"
+import "../../../js/utils.js" as Utils
 
 CrossBarChild {
     Rectangle {

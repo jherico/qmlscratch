@@ -35,7 +35,7 @@ var uiController = (function () {
         viewport = Controller.getViewportDimensions();
         uiWindow = new OverlayWindow({
             title: 'UI Wireframe', 
-            source: Script.resolvePath("qml/WireFrame.qml"), 
+            source: Script.resolvePath("qml/newUi/Main.qml"), 
             width: 1280, height: 720, 
             visible: false
         });

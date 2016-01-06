@@ -1,10 +1,10 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
-import "crossbar"
+
 import "controls"
-import "menu"
 import "."
 import "../js/utils.js" as Utils
+import "newUi" as NewUi
 
 ApplicationWindow {
     visible: true
@@ -30,7 +30,7 @@ ApplicationWindow {
             anchors.fill: parent
             onEnabledChanged: if (!enabled) timer.running = true
 
-            WireFrame {
+            NewUi.Main {
                 id: wireFrame
                 anchors.fill: parent
 
@@ -83,5 +83,4 @@ ApplicationWindow {
         }
 
     }
-
 }

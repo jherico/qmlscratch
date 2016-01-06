@@ -13,7 +13,7 @@ Menu {
         }
     }
     Menu {
-        title: "EditLongName"
+        title: "Edit"
 
         MenuItem {
             text: "Cut"
@@ -39,6 +39,8 @@ Menu {
 
         Menu {
             title: "More Stuff"
+
+            Menu { title: "Empty" }
 
             MenuItem {
                 text: "Do Nothing"

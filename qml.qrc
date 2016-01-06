@@ -1,24 +1,27 @@
 <RCC>
     <qresource prefix="/">
         <file>fonts/FontAwesome.otf</file>
-        <file>fonts/ProximaNova-Light.otf</file>
-        <file>fonts/ProximaNova-Regular.otf</file>
         <file>qml/controls/FontAwesome.qml</file>
         <file>qml/controls/HifiWebView.qml</file>
         <file>qml/controls/IconOverText.qml</file>
-        <file>qml/crossbar/CrossBar.qml</file>
-        <file>qml/crossbar/CrossBarChild.qml</file>
-        <file>qml/crossbar/CrossBarItem.qml</file>
-        <file>qml/crossbar/CrossBarMenuChild.qml</file>
-        <file>qml/subMenus/Audio.qml</file>
-        <file>qml/subMenus/Directory.qml</file>
-        <file>qml/subMenus/Display.qml</file>
-        <file>qml/subMenus/Market.qml</file>
-        <file>qml/subMenus/Mic.qml</file>
-        <file>qml/subMenus/Settings.qml</file>
-        <file>qml/subMenus/View.qml</file>
+        <file>qml/controls/crossbar/CrossBar.qml</file>
+        <file>qml/controls/crossbar/CrossBarChild.qml</file>
+        <file>qml/controls/crossbar/CrossBarItem.qml</file>
+        <file>qml/controls/crossbar/CrossBarMenuChild.qml</file>
+        <file>qml/styles/Border.qml</file>
+        <file>qml/styles/HifiConstants.qml</file>
+        <file>qml/styles/HifiPalette.qml</file>
+        <file>qml/newUi/Main.qml</file>
+        <file>qml/newUi/children/Audio.qml</file>
+        <file>qml/newUi/children/Directory.qml</file>
+        <file>qml/newUi/children/Display.qml</file>
+        <file>qml/newUi/children/Market.qml</file>
+        <file>qml/newUi/children/Mic.qml</file>
+        <file>qml/newUi/children/Settings.qml</file>
+        <file>qml/newUi/children/View.qml</file>
+        <file>qml/newUi/fonts/ProximaNova-Light.otf</file>
+        <file>qml/newUi/fonts/ProximaNova-Regular.otf</file>
         <file>qml/main.qml</file>
-        <file>qml/WireFrame.qml</file>
         <file>js/utils.js</file>
         <file>images/settings.png</file>
         <file>images/chip.svg</file>
@@ -27,19 +30,12 @@
         <file>html/loading.html</file>
         <file>qml/TestMenu.qml</file>
         <file>main.cpp</file>
-        <file>qml/menu/VrMenu.qml</file>
-        <file>qml/menu/VrMenuItem.qml</file>
-        <file>qml/styles/Border.qml</file>
-        <file>qml/styles/ButtonStyle.qml</file>
-        <file>qml/styles/HifiConstants.qml</file>
-        <file>qml/styles/HifiPalette.qml</file>
-        <file>qml/styles/IconButtonStyle.qml</file>
         <file>qml/lcars/Constants.qml</file>
         <file>qml/lcars/fonts/tt0105m_.TTF</file>
         <file>qml/lcars/fonts/tt0106m0.TTF</file>
-        <file>qml/MenuTest.qml</file>
-        <file>qml/menu/VrMenuView.qml</file>
-        <file>qml/menu/Text.qml</file>
         <file>qml/LcarsTest.qml</file>
+        <file>qml/controls/FocusMarker.qml</file>
+        <file>qml/controls/ListMenu.qml</file>
+        <file>js/Global.js</file>
     </qresource>
 </RCC>

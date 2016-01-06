@@ -2,12 +2,13 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 import QtWebEngine 1.1
 
-import "../crossbar"
-import "../controls"
+import "../../controls"
+import "../../controls/crossbar"
+import "../../../js/utils.js" as Utils
 
 CrossBarChild {
     id: root
-    name: "Market"
+    name: "Directory"
     delegate: Component {
         Rectangle {
             width: 800; height: 600
@@ -21,7 +22,7 @@ CrossBarChild {
             HifiWebView {
                 anchors.fill: parent
                 anchors.margins: 10
-                url: "https://metaverse.highfidelity.com/marketplace"
+                url: "https://metaverse.highfidelity.com/directory"
             }
 
             Action {
@@ -29,7 +30,6 @@ CrossBarChild {
                 onTriggered: root.closeChild()
                 enabled: root.visible
             }
-
         }
     }
 }
