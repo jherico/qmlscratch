@@ -91,7 +91,7 @@ ListView {
         border.color: "gray"
     }
 
-    function trigger() {
+    function getCurrentItem() {
         if (currentIndex < 0 || currentIndex > model.length) {
             console.warn("Invalid current index, should never happen");
             return;
@@ -102,17 +102,37 @@ ListView {
             return;
         }
 
-        if (!currentItem.enabled) {
-            return;
-        }
-
         var item = model.get(currentIndex).item;
         if (!item) {
             console.warn("Missing model item, should never happen");
             return;
         }
 
-        root.triggered(item);
+        return item;
+    }
+
+    function trigger() {
+        if (currentItem && !currentItem.enabled) {
+            return;
+        }
+
+        var item = getCurrentItem();
+        if (item) {
+            root.triggered(item);
+        }
+    }
+
+    // Special case right keypress for sub-menu navigation
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Right) {
+            var item = getCurrentItem()
+            if (item && item.type === MenuItemType.Menu) {
+                if (currentItem.enabled) {
+                    root.triggered(item)
+                }
+                event.accepted = true
+            }
+        }
     }
 
     Keys.onUpPressed: decrementCurrentIndex()
