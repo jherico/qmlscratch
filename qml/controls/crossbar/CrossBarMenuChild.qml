@@ -9,6 +9,30 @@ CrossBarChild {
     property var model;
     property var modelStack: []
 
+    property var backArrowDelegate: Component {
+        FontAwesome {
+            text: "\uf0d9"
+            y: currentItem.y + currentItem.height / 2.0 - height / 2.0
+            x: currentItem.x - width - 8;
+            size: 48
+            color: "gray"
+            visible: false
+            Connections {
+                target: root
+                onModelChanged: {
+                    visible = modelStack.length != 0
+                }
+            }
+        }
+    }
+
+    onCurrentItemChanged: {
+        if (currentItem) {
+            console.log("Creating backarrow")
+            backArrowDelegate.createObject(root);
+        }
+    }
+
     delegate: Component {
         id: component
         ListMenu {

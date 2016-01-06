@@ -37,6 +37,11 @@ Menu {
 
         MenuSeparator { }
 
+    }
+
+    Menu {
+        title: "Display"
+        ExclusiveGroup { id: displayMode }
         Menu {
             title: "More Stuff"
 
@@ -47,11 +52,6 @@ Menu {
                 onTriggered: console.log("Nothing")
             }
         }
-    }
-
-    Menu {
-        title: "Display"
-        ExclusiveGroup { id: displayMode }
         MenuItem {
             text: "Oculus"
             exclusiveGroup: displayMode
