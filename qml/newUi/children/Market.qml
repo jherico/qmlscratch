@@ -4,7 +4,6 @@ import QtWebEngine 1.1
 
 import "../../controls"
 import "../../controls/crossbar"
-import "../../../js/utils.js" as Utils
 
 CrossBarChild {
     id: root

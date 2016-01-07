@@ -21,13 +21,11 @@
         <file>qml/newUi/fonts/ProximaNova-Light.otf</file>
         <file>qml/newUi/fonts/ProximaNova-Regular.otf</file>
         <file>qml/main.qml</file>
-        <file>js/utils.js</file>
         <file>images/settings.png</file>
         <file>images/chip.svg</file>
         <file>images/gear.svg</file>
         <file>html/loading.css</file>
         <file>html/loading.html</file>
-        <file>qml/TestMenu.qml</file>
         <file>main.cpp</file>
         <file>qml/lcars/Constants.qml</file>
         <file>qml/lcars/fonts/tt0105m_.TTF</file>
@@ -35,12 +33,13 @@
         <file>qml/LcarsTest.qml</file>
         <file>qml/controls/FocusMarker.qml</file>
         <file>qml/controls/ListMenu.qml</file>
-        <file>js/Global.js</file>
         <file>images/hifi-logo.svg</file>
         <file>qml/newUi/children/Hifi.qml</file>
         <file>qml/newUi/children/Avatar.qml</file>
         <file>qml/newUi/children/Developer.qml</file>
         <file>qml/newUi/children/Edit.qml</file>
         <file>qml/newUi/children/Navigate.qml</file>
+        <file>qml/Stubs.qml</file>
+        <file>qml/EmptyListModel.qml</file>
     </qresource>
 </RCC>

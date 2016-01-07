@@ -2,7 +2,6 @@ import QtQuick 2.5
 
 import "../../controls"
 import "../../controls/crossbar"
-import "../../../js/utils.js" as Utils
 
 CrossBarMenuChild {
     id: root

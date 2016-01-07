@@ -2,12 +2,16 @@ import QtQuick 2.5
 import QtQuick.Controls 1.4
 
 import ".."
-import "../../../js/utils.js" as Utils
 
 CrossBarChild {
     id: root
+    property var menu;
     property var model;
-    property var modelStack: []
+    property var modelStack: [];
+
+    onMenuChanged: {
+        model = MenuHelper.toModel(menu);
+    }
 
     property var backArrowDelegate: Component {
         FontAwesome {
@@ -20,7 +24,7 @@ CrossBarChild {
             Connections {
                 target: root
                 onModelChanged: {
-                    visible = modelStack.length != 0
+                    visible = modelStack.length !== 0
                 }
             }
         }
@@ -39,11 +43,10 @@ CrossBarChild {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             model: root.model
-
             onTriggered: switch (menu.type) {
                 case MenuItemType.Menu:
                     modelStack.push(root.model);
-                    root.model = Utils.menuItemsToListModel(root, menu.items);
+                    root.model = MenuHelper.toModel(menu);
                     currentIndex = 0
                     break;
 
@@ -54,7 +57,7 @@ CrossBarChild {
                     }
                     menu.trigger();
                     closeChild();
-                    Utils.closeDialog(root);
+                    Desktop.closeDialog(root);
                     break;
 
                 case MenuItemType.Separator:

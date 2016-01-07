@@ -7,10 +7,12 @@ PathView {
     highlightRangeMode: PathView.StrictlyEnforceRange
     preferredHighlightBegin: 0.5
     preferredHighlightEnd: 0.5
-    property var subItems: []
+    property var menu
     property var currentChild
     property var targetParent
     property real overdraw: 0.0
+
+    Component.onCompleted: model = MenuHelper.toModel(menu)
 
     signal childOpened()
     signal restore()
@@ -103,12 +105,21 @@ PathView {
         }
     }
 
+    Component {
+        id: subMenu
+        CrossBarMenuChild {
+
+        }
+    }
+
     onPressed: {
-        if (subItems.length > index) {
-            currentChild = subItems[index].createObject(targetParent);
-            currentChild.crossBar = root
-            currentChild.visible = true
-            currentChild.forceActiveFocus()
+        var item = model.get(currentIndex);
+        if (item) {
+            currentChild = subMenu.createObject(targetParent);
+            currentChild.menu = item.item
+            currentChild.crossBar = root;
+            currentChild.visible = true;
+            currentChild.forceActiveFocus();
             childOpened()
         }
     }

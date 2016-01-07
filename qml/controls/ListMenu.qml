@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
 
-import "../../js/utils.js" as Utils
-
 ListView {
     id: root
     focus: true

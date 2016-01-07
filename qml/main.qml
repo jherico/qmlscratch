@@ -3,7 +3,6 @@ import QtQuick.Controls 1.4
 
 import "controls"
 import "."
-import "../js/utils.js" as Utils
 import "newUi" as NewUi
 
 ApplicationWindow {
@@ -14,8 +13,7 @@ ApplicationWindow {
 
     Item {
         anchors.fill: parent
-        objectName: Utils.OFFSCREEN_ROOT_OBJECT_NAME
-        property var rootMenu: TestMenu { objectName: "rootMenu" }
+        objectName: Desktop._OFFSCREEN_ROOT_OBJECT_NAME
 
         Timer {
             id: timer
@@ -26,7 +24,7 @@ ApplicationWindow {
 
         Item {
             id: wireFrameContainer
-            objectName: Utils.OFFSCREEN_DIALOG_OBJECT_NAME
+            objectName: Desktop._OFFSCREEN_DIALOG_OBJECT_NAME
             anchors.fill: parent
             onEnabledChanged: if (!enabled) timer.running = true
 

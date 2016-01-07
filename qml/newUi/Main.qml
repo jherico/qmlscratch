@@ -4,9 +4,6 @@ import QtGraphicalEffects 1.0
 
 import "../controls"
 import "../controls/crossbar"
-import "../../js/utils.js" as Utils
-import "../../js/Global.js" as Global
-import "children" as Child
 
 FocusScope {
     id: topRoot
@@ -18,8 +15,8 @@ FocusScope {
     Component.onCompleted: {
         crossBar.restore();
         if (enabled) {
-            if (Global.Interfaces.Account.isLoggedIn()) {
-                username.text = Global.Interfaces.Account.getUsername();
+            if (Account.isLoggedIn()) {
+                username.text = Account.getUsername();
             }
         }
     }
@@ -27,8 +24,8 @@ FocusScope {
     onEnabledChanged: {
         crossBar.restore()
         if (enabled) {
-            if (Global.Interfaces.Account.isLoggedIn()) {
-                username.text = Global.Interfaces.Account.getUsername();
+            if (Account.isLoggedIn()) {
+                username.text = Account.getUsername();
             }
         }
         // FIXME this will break once we have more than one dialog visible
@@ -90,13 +87,32 @@ FocusScope {
                 icon: "\uf04b"
                 text: "Resume"
                 onPressed: {
-                    Utils.closeDialog(topRoot)
+                    Desktop.closeDialog(topRoot)
                 }
                 KeyNavigation.down: crossBar
                 KeyNavigation.left: quitIcon
                 KeyNavigation.right: quitIcon
             }
         }
+
+//        Rectangle {
+//            id: crossBar
+//            anchors.left: parent.left
+//            anchors.right: parent.right
+//            height: parent.height / 3.0
+//            y: parent.height / 3.0
+//            color: "beige"
+//            function restore() {
+//                color = "red"
+//                restoreTimer.running = true
+//            }
+//            Timer {
+//                id: restoreTimer
+//                interval: 200
+//                onTriggered: crossBar.color = "beige"
+//                running: false
+//            }
+//        }
 
         CrossBar {
             id: crossBar
@@ -105,46 +121,11 @@ FocusScope {
             height: parent.height / 3.0
             y: parent.height / 3.0
             targetParent: topRoot
+            menu: rootMenu
 
-            // The order here must match the order for the model elements
-            subItems: [
-                subHifi,
-                subNavigate,
-                subMarket,
-                subSettings,
-                subDeveloper,
-                subAvatar,
-                subDisplay,
-                subAudio,
-                subView,
-                subEdit,
-            ]
-
-            model: ListModel {
-                ListElement { icon: "https://raw.githubusercontent.com/jherico/qmlscratch/master/images/hifi-logo.svg" }
-                ListElement { name: "Navigate" }
-                ListElement { name: "Market" }
-                ListElement { name: "Settings" }
-                ListElement { name: "Developer" }
-                ListElement { name: "Avatar" }
-                ListElement { name: "Display" }
-                ListElement { name: "Audio" }
-                ListElement { name: "View" }
-                ListElement { name: "Edit" }
-            }
-
-            Component { id: subAudio; Child.Audio { } }
-            Component { id: subAvatar; Child.Avatar { } }
-            Component { id: subDeveloper; Child.Developer { } }
-            Component { id: subDisplay; Child.Display { } }
-            Component { id: subEdit; Child.Edit { } }
-            Component { id: subHifi; Child.Hifi { } }
-            Component { id: subMarket; Child.Market { } }
-            Component { id: subNavigate; Child.Navigate { } }
-            Component { id: subSettings; Child.Settings { } }
-            Component { id: subView; Child.View { } }
-
-
+            // blur.visible and content.visible can't just be bound
+            // together since we need to control the order of updates
+            // or the blur doesn't render properly.
             onChildOpened: {
                 blur.visible = true
                 content.visible = false
@@ -194,18 +175,7 @@ FocusScope {
         }
     }
 
-    function closeOverlayWindow(item) {
-        while (item && item.objectName !== "topLevelWindow") {
-            item = item.parent
-        }
-        if (item) {
-            item.enabled = false
-        } else {
-            console.warn("No top level window found")
-        }
-    }
-
-    Keys.onEscapePressed: closeOverlayWindow(topRoot)
+    Keys.onEscapePressed: Desktop.closeDialog(item);
 
     KeyNavigation.up: crossBar
     KeyNavigation.down: crossBar
