@@ -17,7 +17,7 @@ CrossBarChild {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             font.pointSize: 36
-            text: "Mic Menu\nNot Implemented Yet"
+            text: "Developer Menu\nNot Implemented Yet"
         }
     }
 }

@@ -6,7 +6,7 @@ import ".."
 
 Item {
     id: root
-    width: imageLabel.visible ? imageLabel.width * 1.5 : textLabel.width
+    width: imageLabel.visible ? imageLabel.width * 1.2 : textLabel.width
     height: imageLabel.visible ? imageLabel.height : textLabel.height
     property real size: (1.0 + 0.6 * PathView.selectedValue)
     property bool isCurrentItem: PathView.isCurrentItem

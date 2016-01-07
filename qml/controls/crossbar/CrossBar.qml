@@ -10,21 +10,22 @@ PathView {
     property var subItems: []
     property var currentChild
     property var targetParent
+    property real overdraw: 0.0
 
     signal childOpened()
     signal restore()
     signal pressed(var index)
 
     path: Path {
-        startX: 0; startY: root.height / 2.0
+        startX: 0 - (overdraw * root.width); startY: root.height / 2.0
         PathAttribute { name: "selectedValue"; value: 0.0 }
-        PathLine { x: root.width * 0.45; y: root.height / 2.0; }
+        PathLine { x: root.width * 0.4; y: root.height / 2.0; }
         PathAttribute { name: "selectedValue"; value: 0.0 }
         PathLine { x: root.width * 0.5; y: root.height / 2.0; }
         PathAttribute { name: "selectedValue"; value: 1.0 }
-        PathLine { x: root.width * 0.55; y: root.height / 2.0; }
+        PathLine { x: root.width * 0.6; y: root.height / 2.0; }
         PathAttribute { name: "selectedValue"; value: 0.0 }
-        PathLine { x: root.width; y: root.height / 2.0; }
+        PathLine { x: root.width + (overdraw * root.width); y: root.height / 2.0; }
         PathAttribute { name: "selectedValue"; value: 0.0 }
     }
 

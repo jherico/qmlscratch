@@ -1,8 +1,11 @@
 Audio Audio.qml
+Avatar Avatar.qml
+Developer Developer.qml
 Directory Directory.qml
 Display Display.qml
-Market Market.qml
-Mic Mic.qml
-View View.qml
-Settings Settings.qml
+Edit Edit.qml
 Hifi Hifi.qml
+Market Market.qml
+Navigate Navigate.qml
+Settings Settings.qml
+View View.qml

@@ -106,25 +106,41 @@ FocusScope {
             y: parent.height / 3.0
             targetParent: topRoot
 
-            subItems: [ subHifi, subMic, subAudio, subView, subDisplay, subDirectory, subMarket, subSettings ]
+            // The order here must match the order for the model elements
+            subItems: [
+                subHifi,
+                subNavigate,
+                subMarket,
+                subSettings,
+                subDeveloper,
+                subAvatar,
+                subDisplay,
+                subAudio,
+                subView,
+                subEdit,
+            ]
 
             model: ListModel {
                 ListElement { icon: "https://raw.githubusercontent.com/jherico/qmlscratch/master/images/hifi-logo.svg" }
-                ListElement { name: "Mic" }
-                ListElement { name: "Audio" }
-                ListElement { name: "View" }
-                ListElement { name: "Display" }
-                ListElement { name: "Directory" }
+                ListElement { name: "Navigate" }
                 ListElement { name: "Market" }
                 ListElement { name: "Settings" }
+                ListElement { name: "Developer" }
+                ListElement { name: "Avatar" }
+                ListElement { name: "Display" }
+                ListElement { name: "Audio" }
+                ListElement { name: "View" }
+                ListElement { name: "Edit" }
             }
 
-            Component { id: subHifi; Child.Hifi { } }
-            Component { id: subMic; Child.Mic { } }
             Component { id: subAudio; Child.Audio { } }
-            Component { id: subDirectory; Child.Directory { } }
-            Component { id: subMarket; Child.Market { } }
+            Component { id: subAvatar; Child.Avatar { } }
+            Component { id: subDeveloper; Child.Developer { } }
             Component { id: subDisplay; Child.Display { } }
+            Component { id: subEdit; Child.Edit { } }
+            Component { id: subHifi; Child.Hifi { } }
+            Component { id: subMarket; Child.Market { } }
+            Component { id: subNavigate; Child.Navigate { } }
             Component { id: subSettings; Child.Settings { } }
             Component { id: subView; Child.View { } }
 

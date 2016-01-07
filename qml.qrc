@@ -16,7 +16,6 @@
         <file>qml/newUi/children/Directory.qml</file>
         <file>qml/newUi/children/Display.qml</file>
         <file>qml/newUi/children/Market.qml</file>
-        <file>qml/newUi/children/Mic.qml</file>
         <file>qml/newUi/children/Settings.qml</file>
         <file>qml/newUi/children/View.qml</file>
         <file>qml/newUi/fonts/ProximaNova-Light.otf</file>
@@ -39,5 +38,9 @@
         <file>js/Global.js</file>
         <file>images/hifi-logo.svg</file>
         <file>qml/newUi/children/Hifi.qml</file>
+        <file>qml/newUi/children/Avatar.qml</file>
+        <file>qml/newUi/children/Developer.qml</file>
+        <file>qml/newUi/children/Edit.qml</file>
+        <file>qml/newUi/children/Navigate.qml</file>
     </qresource>
 </RCC>
