@@ -109,7 +109,7 @@ FocusScope {
             subItems: [ subHifi, subMic, subAudio, subView, subDisplay, subDirectory, subMarket, subSettings ]
 
             model: ListModel {
-                ListElement { icon: "/images/hifi-logo.svg" }
+                ListElement { icon: "https://raw.githubusercontent.com/jherico/qmlscratch/master/images/hifi-logo.svg" }
                 ListElement { name: "Mic" }
                 ListElement { name: "Audio" }
                 ListElement { name: "View" }
