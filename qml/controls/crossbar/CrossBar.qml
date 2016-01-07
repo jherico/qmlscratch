@@ -29,7 +29,8 @@ PathView {
     }
 
     delegate: CrossBarItem {
-        text: name
+        //text: name
+        //icon: icon
         onPressed: {
             if (root.currentIndex === index) {
                 root.pressed(index)

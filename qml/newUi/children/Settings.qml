@@ -1,8 +1,6 @@
 import QtQuick 2.5
 
-import "../../controls"
 import "../../controls/crossbar"
-import "../../../js/utils.js" as Utils
 
 CrossBarChild {
     Rectangle {
@@ -14,10 +12,12 @@ CrossBarChild {
         border.width: 5
         border.color: "gray"
         Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
             font.pointSize: 36
-            text: "Not Implemented Yet"
+            text: "Settings Menu\nNot Implemented Yet"
         }
     }
 }

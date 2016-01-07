@@ -37,5 +37,7 @@
         <file>qml/controls/FocusMarker.qml</file>
         <file>qml/controls/ListMenu.qml</file>
         <file>js/Global.js</file>
+        <file>images/hifi-logo.svg</file>
+        <file>qml/newUi/children/Hifi.qml</file>
     </qresource>
 </RCC>

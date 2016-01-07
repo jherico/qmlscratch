@@ -15,14 +15,6 @@ FocusScope {
     FontLoader { id: lightFont; source: "fonts/ProximaNova-Light.otf" }
     FontLoader { id: mainFont; source: "fonts/ProximaNova-Regular.otf" }
 
-    Component { id: subMic; Child.Mic { } }
-    Component { id: subAudio; Child.Audio { } }
-    Component { id: subDirectory; Child.Directory { } }
-    Component { id: subMarket; Child.Market { } }
-    Component { id: subDisplay; Child.Display { } }
-    Component { id: subSettings; Child.Settings { } }
-    Component { id: subView; Child.View { } }
-
     Component.onCompleted: {
         crossBar.restore();
         if (enabled) {
@@ -114,7 +106,10 @@ FocusScope {
             y: parent.height / 3.0
             targetParent: topRoot
 
+            subItems: [ subHifi, subMic, subAudio, subView, subDisplay, subDirectory, subMarket, subSettings ]
+
             model: ListModel {
+                ListElement { icon: "/images/hifi-logo.svg" }
                 ListElement { name: "Mic" }
                 ListElement { name: "Audio" }
                 ListElement { name: "View" }
@@ -124,7 +119,15 @@ FocusScope {
                 ListElement { name: "Settings" }
             }
 
-            subItems: [ subMic, subAudio, subView, subDisplay, subDirectory, subMarket, subSettings ]
+            Component { id: subHifi; Child.Hifi { } }
+            Component { id: subMic; Child.Mic { } }
+            Component { id: subAudio; Child.Audio { } }
+            Component { id: subDirectory; Child.Directory { } }
+            Component { id: subMarket; Child.Market { } }
+            Component { id: subDisplay; Child.Display { } }
+            Component { id: subSettings; Child.Settings { } }
+            Component { id: subView; Child.View { } }
+
 
             onChildOpened: {
                 blur.visible = true
