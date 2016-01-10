@@ -10,6 +10,23 @@ Item {
     }
 
     Item {
+        objectName: "ScriptDiscoveryService"
+        property var scriptsModelFilter: scriptsModel
+        signal scriptCountChanged()
+        property var _runningScripts:[
+            { name: "wireFrameTest.js", url: "foo/wireframetest.js", path: "foo/wireframetest.js", local: true },
+            { name: "edit.js", url: "foo/edit.js", path: "foo/edit.js", local: false },
+            { name: "listAllScripts.js", url: "foo/listAllScripts.js", path: "foo/listAllScripts.js", local: false },
+            { name: "users.js", url: "foo/users.js", path: "foo/users.js", local: false },
+        ]
+
+        function getRunning() {
+            return _runningScripts;
+        }
+
+    }
+
+    Item {
         id: menuHelper
         objectName: "MenuHelper"
 

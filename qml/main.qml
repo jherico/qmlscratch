@@ -1,9 +1,12 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
 
-import "controls"
+//import "newUi" as NewUi
+import "vr"
+import "vr/dialogs"
 import "."
-import "newUi" as NewUi
+import "vr" as Vr
+import "arcane" as Arcane
 
 ApplicationWindow {
     visible: true
@@ -15,6 +18,36 @@ ApplicationWindow {
         anchors.fill: parent
         objectName: Desktop._OFFSCREEN_ROOT_OBJECT_NAME
 
+        Button {
+            text: "File Open"
+            onClicked: fileDialog.enabled = true;
+        }
+
+        Arcane.Test {
+            anchors.centerIn: parent
+            height: 600; width: 600
+        }
+
+        /*
+
+        Rectangle {
+            id: root
+            Vr.Constants { id: vr }
+            implicitWidth: 384; implicitHeight: 640
+            anchors.centerIn: parent
+            color: vr.windows.colors.background
+            border.color: vr.controls.colors.background
+            border.width: vr.styles.borderWidth
+            radius: vr.styles.borderRadius
+            RunningScripts { }
+        }
+
+        FileDialog {
+            id: fileDialog
+            width: 800; height: 600
+            anchors.centerIn: parent
+            onSelectedFile: console.log("Chose file " + file)
+        }
         Timer {
             id: timer
             running: false
@@ -79,6 +112,6 @@ ApplicationWindow {
                 }
             }
         }
-
+*/
     }
 }

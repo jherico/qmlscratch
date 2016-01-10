@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 import QtGraphicalEffects 1.0
 
 import "../controls"
+import ".." as Hifi
 import "../controls/crossbar"
 
 FocusScope {
@@ -12,173 +13,178 @@ FocusScope {
     FontLoader { id: lightFont; source: "fonts/ProximaNova-Light.otf" }
     FontLoader { id: mainFont; source: "fonts/ProximaNova-Regular.otf" }
 
-    Component.onCompleted: {
-        crossBar.restore();
-        if (enabled) {
-            if (Account.isLoggedIn()) {
-                username.text = Account.getUsername();
-            }
-        }
+    Hifi.FileDialog {
+        width: 800; height: 600
+        anchors.centerIn: parent
     }
 
-    onEnabledChanged: {
-        crossBar.restore()
-        if (enabled) {
-            if (Account.isLoggedIn()) {
-                username.text = Account.getUsername();
-            }
-        }
-        // FIXME this will break once we have more than one dialog visible
-        offscreenFlags.navigationFocused = enabled;
-    }
+//    Component.onCompleted: {
+//        crossBar.restore();
+//        if (enabled) {
+//            if (Account.isLoggedIn()) {
+//                username.text = Account.getUsername();
+//            }
+//        }
+//    }
 
-    // Blur for the content when a cross bar child item is up
-    GaussianBlur {
-        id: blur
-        z: content.z - 1
-        anchors.fill: parent
-        source: content
-        radius: 8
-        samples: 16
-        visible: false
-    }
+//    onEnabledChanged: {
+//        crossBar.restore()
+//        if (enabled) {
+//            if (Account.isLoggedIn()) {
+//                username.text = Account.getUsername();
+//            }
+//        }
+//        // FIXME this will break once we have more than one dialog visible
+//        offscreenFlags.navigationFocused = enabled;
+//    }
 
-    // Enclose the content in a single rectangle in order to
-    // support the blur effect (blur and target should be siblings)
-    Rectangle {
-        color: "white"
-        id: content
-        anchors.fill: parent
-        Row {
-            spacing: 48
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: parent.height * 0.1
+//    // Blur for the content when a cross bar child item is up
+//    GaussianBlur {
+//        id: blur
+//        z: content.z - 1
+//        anchors.fill: parent
+//        source: content
+//        radius: 8
+//        samples: 16
+//        visible: false
+//    }
 
-            IconOverText {
-                id: quitIcon
-                icon: "\uf00d"
-                text: "Quit"
+//    // Enclose the content in a single rectangle in order to
+//    // support the blur effect (blur and target should be siblings)
+//    Rectangle {
+//        color: "white"
+//        id: content
+//        anchors.fill: parent
+//        Row {
+//            spacing: 48
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            y: parent.height * 0.1
 
-                onPressed: Qt.quit()
-                KeyNavigation.down: crossBar
-                KeyNavigation.left: resumeIcon
-                KeyNavigation.right: resumeIcon
-            }
+//            IconOverText {
+//                id: quitIcon
+//                icon: "\uf00d"
+//                text: "Quit"
 
-            // Spacer to account for the asymmetry of the
-            // text item with wide letter spacing
-            Item { width: 10; height: 1 }
+//                onPressed: Qt.quit()
+//                KeyNavigation.down: crossBar
+//                KeyNavigation.left: resumeIcon
+//                KeyNavigation.right: resumeIcon
+//            }
 
-            Text {
-                anchors.top: parent.top
-                font.weight: Font.Thin
-                anchors.bottom: parent.bottom
-                font.family: lightFont.name
-                font.letterSpacing: 10
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                font.capitalization: Font.AllUppercase
-                text: "Paused"
-                font.pointSize: 24
-            }
+//            // Spacer to account for the asymmetry of the
+//            // text item with wide letter spacing
+//            Item { width: 10; height: 1 }
 
-            IconOverText {
-                id: resumeIcon
-                icon: "\uf04b"
-                text: "Resume"
-                onPressed: {
-                    Desktop.closeDialog(topRoot)
-                }
-                KeyNavigation.down: crossBar
-                KeyNavigation.left: quitIcon
-                KeyNavigation.right: quitIcon
-            }
-        }
+//            Text {
+//                anchors.top: parent.top
+//                font.weight: Font.Thin
+//                anchors.bottom: parent.bottom
+//                font.family: lightFont.name
+//                font.letterSpacing: 10
+//                verticalAlignment: Text.AlignVCenter
+//                horizontalAlignment: Text.AlignHCenter
+//                font.capitalization: Font.AllUppercase
+//                text: "Paused"
+//                font.pointSize: 24
+//            }
 
-//        Rectangle {
+//            IconOverText {
+//                id: resumeIcon
+//                icon: "\uf04b"
+//                text: "Resume"
+//                onPressed: {
+//                    Desktop.closeDialog(topRoot)
+//                }
+//                KeyNavigation.down: crossBar
+//                KeyNavigation.left: quitIcon
+//                KeyNavigation.right: quitIcon
+//            }
+//        }
+
+////        Rectangle {
+////            id: crossBar
+////            anchors.left: parent.left
+////            anchors.right: parent.right
+////            height: parent.height / 3.0
+////            y: parent.height / 3.0
+////            color: "beige"
+////            function restore() {
+////                color = "red"
+////                restoreTimer.running = true
+////            }
+////            Timer {
+////                id: restoreTimer
+////                interval: 200
+////                onTriggered: crossBar.color = "beige"
+////                running: false
+////            }
+////        }
+
+//        CrossBar {
 //            id: crossBar
 //            anchors.left: parent.left
 //            anchors.right: parent.right
 //            height: parent.height / 3.0
 //            y: parent.height / 3.0
-//            color: "beige"
-//            function restore() {
-//                color = "red"
-//                restoreTimer.running = true
+//            targetParent: topRoot
+//            menu: rootMenu
+
+//            // blur.visible and content.visible can't just be bound
+//            // together since we need to control the order of updates
+//            // or the blur doesn't render properly.
+//            onChildOpened: {
+//                blur.visible = true
+//                content.visible = false
 //            }
-//            Timer {
-//                id: restoreTimer
-//                interval: 200
-//                onTriggered: crossBar.color = "beige"
-//                running: false
+
+//            onRestore: {
+//                content.visible = true
+//                blur.visible = false
 //            }
+
+//            MouseArea {
+//                anchors.fill: parent
+//                hoverEnabled: true
+//                onEntered: forceActiveFocus()
+//            }
+
+//            KeyNavigation.up: resumeIcon
+//            KeyNavigation.down: resumeIcon
 //        }
 
-        CrossBar {
-            id: crossBar
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: parent.height / 3.0
-            y: parent.height / 3.0
-            targetParent: topRoot
-            menu: rootMenu
+//        Column {
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            y: parent.height * 0.8
 
-            // blur.visible and content.visible can't just be bound
-            // together since we need to control the order of updates
-            // or the blur doesn't render properly.
-            onChildOpened: {
-                blur.visible = true
-                content.visible = false
-            }
+//            Text {
+//                verticalAlignment: Text.AlignVCenter
+//                horizontalAlignment: Text.AlignHCenter
+//                text: "Update Available"
+//                font.family: lightFont.name
+//                font.pointSize: 12
+//            }
 
-            onRestore: {
-                content.visible = true
-                blur.visible = false
-            }
+//            Item {
+//                width: 1
+//                height: 8
+//            }
 
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                onEntered: forceActiveFocus()
-            }
+//            Text {
+//                id: username
+//                anchors.left: parent.left
+//                anchors.right: parent.right
+//                text: "Unknown User"
+//                font.pointSize: 16
+//                verticalAlignment: Text.AlignVCenter
+//                horizontalAlignment: Text.AlignHCenter
+//            }
+//        }
+//    }
 
-            KeyNavigation.up: resumeIcon
-            KeyNavigation.down: resumeIcon
-        }
+//    Keys.onEscapePressed: Desktop.closeDialog(item);
 
-        Column {
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: parent.height * 0.8
-
-            Text {
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-                text: "Update Available"
-                font.family: lightFont.name
-                font.pointSize: 12
-            }
-
-            Item {
-                width: 1
-                height: 8
-            }
-
-            Text {
-                id: username
-                anchors.left: parent.left
-                anchors.right: parent.right
-                text: "Unknown User"
-                font.pointSize: 16
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignHCenter
-            }
-        }
-    }
-
-    Keys.onEscapePressed: Desktop.closeDialog(item);
-
-    KeyNavigation.up: crossBar
-    KeyNavigation.down: crossBar
-    KeyNavigation.left: crossBar
-    KeyNavigation.right: crossBar
+//    KeyNavigation.up: crossBar
+//    KeyNavigation.down: crossBar
+//    KeyNavigation.left: crossBar
+//    KeyNavigation.right: crossBar
 }

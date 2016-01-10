@@ -1,10 +1,12 @@
 TEMPLATE = app
 
-QT += qml quick xml webengine
+QT += gui qml quick xml webengine widgets
 
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    ScriptsModel.cpp \
+    ScriptsModelFilter.cpp
 
 RESOURCES += qml.qrc
 
@@ -13,3 +15,7 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+
+HEADERS += \
+    ScriptsModel.h \
+    ScriptsModelFilter.h
