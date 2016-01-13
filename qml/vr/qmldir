@@ -9,3 +9,4 @@ ListMenu controls/ListMenu.qml
 TextEdit controls/TextEdit.qml
 TableView controls/TableView.qml
 Text controls/Text.qml
+DialogWrapper dialogs/DialogWrapper.qml

@@ -1,12 +1,9 @@
 import QtQuick 2.5
 import QtQuick.Controls 1.4
+import Qt.labs.settings 1.0
 
-//import "newUi" as NewUi
-import "vr"
-import "vr/dialogs"
-import "."
-import "vr" as Vr
-import "arcane" as Arcane
+import "file:///C:/Users/bdavis/Git/hifi/interface/resources/qml"
+import "file:///C:/Users/bdavis/Git/hifi/interface/resources/qml/windows"
 
 ApplicationWindow {
     visible: true
@@ -14,21 +11,71 @@ ApplicationWindow {
     height: 720
     title: qsTr("Scratch App")
 
+    Root {
+        id: desktop
+        anchors.fill: parent
+
+        Row {
+            anchors { margins: 8; left: parent.left; top: parent.top }
+            spacing: 8
+            Button {
+                text: "restore all"
+                onClicked: {
+                    for (var i = 0; i < desktop.windows.length; ++i) {
+                        desktop.windows[i].enabled = true
+                    }
+                }
+            }
+
+            Button {
+                text: "add web tab"
+                onClicked: {
+                    desktop.toolWindow.addWebTab({
+                        title: "test",
+                        source: "file:///C:/Users/bdavis/Git/hifi/examples/html/entityProperties.html",
+                        width: 500, height: 720
+                    });
+                }
+            }
+
+        }
+
+
+        Window {
+            id: blue
+            x: 1280 / 2; y: 720 / 2
+            closable: false
+            Settings {
+                category: "TestWindow.Position"
+                property alias x: blue.x
+                property alias y: blue.y
+            }
+
+            width: 100; height: 100
+            resizable: false
+            Rectangle {
+                anchors.fill: parent
+                color: "blue"
+            }
+        }
+    }
+
+    /*
+
     Item {
+        id: desktop
         anchors.fill: parent
         objectName: Desktop._OFFSCREEN_ROOT_OBJECT_NAME
+        property bool uiVisible: true
+        property variant toolbars: { "_root" : null }
+        focus: true
 
-        Button {
-            text: "File Open"
-            onClicked: fileDialog.enabled = true;
-        }
+
 
         Arcane.Test {
             anchors.centerIn: parent
             height: 600; width: 600
         }
-
-        /*
 
         Rectangle {
             id: root
@@ -112,6 +159,8 @@ ApplicationWindow {
                 }
             }
         }
+        Keys.onMenuPressed: desktop.uiVisible = !desktop.uiVisible
+        Keys.onEscapePressed: desktop.uiVisible = !desktop.uiVisible
+        }
 */
-    }
 }

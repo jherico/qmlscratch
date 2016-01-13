@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
-        <file>qml/Stubs.qml</file>
         <file>qml/vr/Constants.qml</file>
         <file>qml/vr/controls/Button.qml</file>
         <file>qml/vr/controls/ComboBox.qml</file>
@@ -16,7 +15,7 @@
         <file>qml/vr/dialogs/FileDialog.qml</file>
         <file>qml/vr/controls/Border.qml</file>
         <file>qml/vr/qmldir</file>
-        <file>qml/gallery/main.qml</file>
+        <file>qml/gallery/Gallery.qml</file>
         <file>qml/gallery/qml/ButtonPage.qml</file>
         <file>qml/gallery/qml/InputPage.qml</file>
         <file>qml/gallery/qml/ProgressPage.qml</file>
@@ -24,7 +23,6 @@
         <file>qml/vr/controls/TextEdit.qml</file>
         <file>qml/vr/dialogs/DialogBase.qml</file>
         <file>qml/vr/controls/TableView.qml</file>
-        <file>qml/RunningScripts.qml</file>
         <file>qml/vr/controls/Text.qml</file>
         <file>qml/arcane/fonts/ALPMAGI.TTF</file>
         <file>qml/arcane/fonts/ClavatScript.ttf</file>
@@ -38,5 +36,6 @@
         <file>qml/arcane/Test.qml</file>
         <file>qml/arcane/Constants.qml</file>
         <file>qml/arcane/SymbolCircle.qml</file>
+        <file>qml/vr/dialogs/DialogWrapper.qml</file>
     </qresource>
 </RCC>

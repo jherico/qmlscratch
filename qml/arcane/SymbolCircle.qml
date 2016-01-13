@@ -9,22 +9,29 @@ Canvas {
     readonly property var symbols: []
     property bool rotate: true
     property bool clockwise: true
-    property color backgroundColor: "#000000"
+    property color backgroundColor: Qt.rgba(0, 0, 0, 1);
+    property color color: Qt.rgba(1, 1, 1, 1);
+
 
     // Revolutions per second
     implicitWidth: 2.0 * maxRadius + circleThickness
     implicitHeight: implicitWidth
     property real speed: 0.08
     property string fontFamily: arcane.demonicFont.name
-    property real textPixelSize: 15
-    property real radius: (Math.min(height, width) / 2) - textPixelSize * 1.8 / 2.0;
-    property real circleThickness: 1.5
-    property real radiusWidth: textPixelSize * 1.5
+    property real textPixelSize: radius * 0.1
+    property real radius: (Math.min(height, width) / 2);
+    property real circleThickness: 1.6
+    property real radiusWidth: textPixelSize * 1.2
     property real outerRadius: radius + radiusWidth / 2.0;
     property real innerRadius: radius - radiusWidth / 2.0;
     property real maxRadius: outerRadius;
     property real minRadius: innerRadius;
     property rect geometry: Qt.rect(0, 0, width, height)
+    property real intervalAngle: Math.PI * 2.0 / symbolCount;
+    property var fillCenter: function(ctx) {
+
+    }
+
     onWidthChanged: requestPaint()
     onHeightChanged: requestPaint()
 
@@ -53,36 +60,36 @@ Canvas {
         {
             ctx.translate(width / 2, height / 2);
 
-            var textRadius = radius + (textPixelSize / 2.0) - circleThickness
             ctx.font = textPixelSize + "px " + fontFamily
-
+            ctx.textBaseline = "middle"
             ctx.strokeStyle = root.backgroundColor;
             ctx.lineWidth = (maxRadius - minRadius);
+
             ctx.beginPath();
             ctx.arc(0, 0, radius, 0, Math.PI * 2, true);
             ctx.stroke();
 
             ctx.strokeStyle = Qt.rgba(1, 1, 1, 1);
             ctx.lineWidth = circleThickness;
+
             ctx.beginPath();
-            ctx.arc(0, 0, outerRadius, 0, Math.PI * 2, true);
+            ctx.arc(0, 0, maxRadius, 0, Math.PI * 2, true);
             ctx.stroke();
 
             ctx.beginPath();
-            ctx.arc(0, 0, innerRadius, 0, Math.PI * 2, true);
+            ctx.arc(0, 0, minRadius, 0, Math.PI * 2, true);
             ctx.stroke();
 
-            var intervalAngle = Math.PI * 2.0 / symbolCount;
-            ctx.lineWidth = 0.8;
+            ctx.fillStyle = Qt.rgba(1, 1, 1, 1);
             ctx.save();
             for (var i = 0; i < symbolCount; ++i) {
-                ctx.beginPath();
                 ctx.rotate(intervalAngle)
-                ctx.text(symbols[i], 0, textRadius);
-                ctx.stroke();
+                ctx.fillText(symbols[i], 0, radius);
             }
             ctx.restore();
+
         }
         ctx.restore();
+        fillCenter(ctx)
     }
 }

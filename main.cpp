@@ -32,15 +32,17 @@ int main(int argc, char *argv[]) {
 
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:/qml");
+    engine.addImportPath("file:///C:/Users/bdavis/Git/hifi/interface/resources/qml");
 
     engine.rootContext()->setContextProperty("scriptsModel",  QVariant::fromValue(&scriptsModelFilter));
 
-    engine.load(QUrl(QStringLiteral("qrc:/qml/Stubs.qml")));
+    engine.load(QUrl(QStringLiteral("file:///C:/Users/bdavis/Git/hifi/interface/resources/qml/test/Stubs.qml")));
     setChild(engine, "rootMenu");
     setChild(engine, "Account");
     setChild(engine, "Desktop");
     setChild(engine, "ScriptDiscoveryService");
     setChild(engine, "MenuHelper");
+    setChild(engine, "urlHandler");
 
     //engine.load(QUrl(QStringLiteral("qrc:/qml/gallery/main.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
