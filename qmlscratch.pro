@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick xml webengine
+QT += qml quick xml webengine testlib
 
 CONFIG += c++11
 
